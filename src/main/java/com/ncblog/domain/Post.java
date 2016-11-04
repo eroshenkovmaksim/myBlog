@@ -11,13 +11,13 @@ import javax.xml.crypto.Data;
 public class Post {
 
     @Id
-    @SequenceGenerator(name="seq-gen", sequenceName="POSTS_ID_SEQ", initialValue=205, allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
+    @SequenceGenerator(name="seq-gen2", sequenceName="POSTS_POST_ID_SEQ", initialValue=205, allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen2")
     @Column(name = "POST_ID")
     private int post_id;
 
 
-    private int user_id;
+//    private int user_id;
 
     @Column (name = "CONTENT")
     private String content;

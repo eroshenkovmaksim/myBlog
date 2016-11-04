@@ -14,5 +14,6 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.ncblog.domain.User"></mapping>
+        <mapping class="com.ncblog.domain.Post"></mapping>
     </session-factory>
 </hibernate-configuration>
