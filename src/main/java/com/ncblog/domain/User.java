@@ -4,6 +4,7 @@ package com.ncblog.domain;
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @SequenceGenerator(name="seq-gen", sequenceName="USERS_ID_SEQ", initialValue=205, allocationSize=5)
+    @SequenceGenerator(name="seq-gen", sequenceName="USERS_ID_SEQ", initialValue=205, allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
     @Column(name = "ID")
     private int user_id;
@@ -28,7 +29,7 @@ public class User {
     private String password;
 
 //    @OneToMany
-//    List<Post> posts;
+//    List<Post> posts = new ArrayList<>();
 
 //    private String first_name;
 //    private String last_name;

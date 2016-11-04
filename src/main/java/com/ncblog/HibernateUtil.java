@@ -12,7 +12,7 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            // РЎРѕР·РґР°РµС‚ СЃРµСЃСЃРёСЋ СЃ hibernate.cfg.xml
+
             Configuration configuration = new Configuration();
             configuration.configure();
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
@@ -30,7 +30,7 @@ public class HibernateUtil {
     }
 
     public static void shutdown() {
-        // Р§РёСЃС‚РёС‚ РєРµС€ Рё Р·Р°РєСЂС‹РІР°РµС‚ СЃРѕРµРґРёРЅРµРЅРёРµ СЃ Р‘Р”
+
         getSessionFactory().close();
     }
 
