@@ -5,6 +5,7 @@ package com.ncblog;
  */
 //import com.hermes.infrastructure.dataaccess.specifications.Specification;
 import com.ncblog.domain.Post;
+import com.ncblog.domain.Posts_Likes;
 import com.ncblog.domain.User;
 
 import javax.persistence.NoResultException;
@@ -117,11 +118,18 @@ public class GenericRepository<T> {
     public GenericDao getDao() {
         return dao;
     }
-    public void addPostToUser(String content,User user){
+
+    public void addPostToUser(Post post,User user){
         GenericRepository<Post> repPost = new GenericRepository<>(Post.class);
-        Post post = new Post(content);
         post.setUser(user);
         user.getPosts().add(post);
         repPost.add(post);
+    }
+    public void addLikeToPostByUser(User user,Post post){
+        GenericRepository<Posts_Likes> repPL = new GenericRepository<>(Posts_Likes.class);
+        Posts_Likes pl = new Posts_Likes(user, post);
+        user.getPosts_likes().add(pl);
+        post.getPosts_likes().add(pl);
+        repPL.add(pl);
     }
 }

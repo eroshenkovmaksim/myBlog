@@ -11,10 +11,17 @@ public class TopMain {
         User max = new User("Max","krasava");
         GenericRepository<User> repUser = new GenericRepository<>(User.class);
         GenericRepository<Post> repPost = new GenericRepository<>(Post.class);
-
+        Post post = new Post("privetik");
+        Post post2 = new Post("aloha");
         repUser.add(ura);
         repUser.add(max);
-        repUser.addPostToUser("Privetik",ura);
+        repUser.addPostToUser(post, ura);
+        repUser.addPostToUser(post2,ura);
+        repUser.addLikeToPostByUser(max,post);
+        repUser.addLikeToPostByUser(ura,post);
+        System.out.print("ura's 1st post got ");
+        System.out.print(post.getPosts_likes().size());
+        System.out.println(" likes");
 
 //        Post post = new Post("privetiki");
 //        Post post2 = new Post("aloha");

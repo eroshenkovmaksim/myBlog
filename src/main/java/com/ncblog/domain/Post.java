@@ -2,9 +2,7 @@ package com.ncblog.domain;
 
 import javax.persistence.*;
 import javax.xml.crypto.Data;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by Администратор on 02.11.2016.
@@ -30,8 +28,10 @@ public class Post {
     @Column (name = "CREATION_DATE")
     private Date creation_date;
 
-//    @OneToMany(mappedBy="post",targetEntity=Posts_Likes.class, fetch=FetchType.EAGER)
-//    Collection<Posts_Likes> posts_likes = new HashSet();
+    @OneToMany(mappedBy="post",targetEntity=Posts_Likes.class, fetch=FetchType.EAGER)
+    Set<Posts_Likes> posts_likes = new HashSet<>(
+
+    );
 //    private int comments;
 
     public Post() {
@@ -49,20 +49,20 @@ public class Post {
         this.creation_date = new Date();
     }
 
-//    public Post(User user, String content, Date creation_date, Collection<Posts_Likes> posts_likes) {
-//        this.user = user;
-//        this.content = content;
-//        this.creation_date = creation_date;
-//        this.posts_likes = posts_likes;
-//    }
+    public Post(User user, String content, Date creation_date, Set<Posts_Likes> posts_likes) {
+        this.user = user;
+        this.content = content;
+        this.creation_date = creation_date;
+        this.posts_likes = posts_likes;
+    }
 
-//    public Collection<Posts_Likes> getPosts_likes() {
-//        return posts_likes;
-//    }
-//
-//    public void setPosts_likes(Collection<Posts_Likes> posts_likes) {
-//        this.posts_likes = posts_likes;
-//    }
+    public Set<Posts_Likes> getPosts_likes() {
+        return posts_likes;
+    }
+
+    public void setPosts_likes(Set<Posts_Likes> posts_likes) {
+        this.posts_likes = posts_likes;
+    }
 
     public User getUser() {
         return user;

@@ -1,9 +1,6 @@
 package com.ncblog.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Администратор on 05.11.2016.
@@ -11,6 +8,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "POSTS_LIKES")
 public class Posts_Likes {
+
+    @Id
+    @SequenceGenerator(name="seq-gen3", sequenceName="POSTS_LIKES_LIKE_ID_SEQ", initialValue=205, allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen3")
+    @Column(name = "LIKE_ID")
+    private int like_id;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="USER_ID",referencedColumnName="USER_ID")
@@ -26,6 +29,10 @@ public class Posts_Likes {
     public Posts_Likes(User user, Post post) {
         this.user = user;
         this.post = post;
+    }
+
+    public int getLike_id() {
+        return like_id;
     }
 
     public User getUser() {

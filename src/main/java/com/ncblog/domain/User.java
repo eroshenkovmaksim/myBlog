@@ -32,6 +32,9 @@ public class User {
     @OneToMany(mappedBy="user",targetEntity=Post.class, fetch=FetchType.EAGER)
     Collection<Post> posts = new HashSet();
 
+    @OneToMany(mappedBy="user",targetEntity=Posts_Likes.class, fetch=FetchType.EAGER)
+    Set<Posts_Likes> posts_likes = new HashSet<>();
+
 //    private String first_name;
 //    private String last_name;
 //    private char gender;
@@ -55,6 +58,23 @@ public class User {
         this.login = login;
         this.password = password;
         this.posts = posts;
+        this.registration_date = new Date();
+    }
+
+    public User(String login, String password, Date registration_date, Collection<Post> posts, Set<Posts_Likes> posts_likes) {
+        this.login = login;
+        this.password = password;
+        this.registration_date = registration_date;
+        this.posts = posts;
+        this.posts_likes = posts_likes;
+    }
+
+    public Set<Posts_Likes> getPosts_likes() {
+        return posts_likes;
+    }
+
+    public void setPosts_likes(Set<Posts_Likes> posts_likes) {
+        this.posts_likes = posts_likes;
     }
 
     public Date getRegistration_date() {
