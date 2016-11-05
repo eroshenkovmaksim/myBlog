@@ -4,6 +4,9 @@ package com.ncblog;
  * Created by Администратор on 04.11.2016.
  */
 //import com.hermes.infrastructure.dataaccess.specifications.Specification;
+import com.ncblog.domain.Post;
+import com.ncblog.domain.User;
+
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import java.util.Collection;
@@ -113,5 +116,12 @@ public class GenericRepository<T> {
     }
     public GenericDao getDao() {
         return dao;
+    }
+    public void addPostToUser(String content,User user){
+        GenericRepository<Post> repPost = new GenericRepository<>(Post.class);
+        Post post = new Post(content);
+        post.setUser(user);
+        user.getPosts().add(post);
+        repPost.add(post);
     }
 }

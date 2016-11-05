@@ -11,10 +11,21 @@ public class TopMain {
         User max = new User("Max","krasava");
         GenericRepository<User> repUser = new GenericRepository<>(User.class);
         GenericRepository<Post> repPost = new GenericRepository<>(Post.class);
-        Post post = new Post("privetiki");
 
         repUser.add(ura);
         repUser.add(max);
-        repPost.add(post);
+        repUser.addPostToUser("Privetik",ura);
+
+//        Post post = new Post("privetiki");
+//        Post post2 = new Post("aloha");
+//
+//        post.setUser(ura);
+//        post2.setUser(ura);
+//        ura.getPosts().add(post);
+//        ura.getPosts().add(post2);
+//
+//        repPost.add(post);
+//        repPost.add(post2);
+//        System.out.println(ura.getPosts());
     }
 }

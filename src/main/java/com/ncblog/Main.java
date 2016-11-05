@@ -1,5 +1,6 @@
 package com.ncblog;
 
+import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
@@ -18,19 +19,27 @@ public class Main {
         Transaction transaction = session.beginTransaction();
         session.save(ura);
 
-        int id = ura.getUser_id();
+        Post post = new Post("privetiki");
+
+        post.setUser(ura);
+        ura.setPost(post);
+
+        session.save(post);
         transaction.commit();
-
-        User uraReborn = (User) session.get(User.class, id);
-        System.out.println(uraReborn.getLogin());
-        session.close();
-
-        User ura2 = new User("Max", "kek");
-        GenericDao<User> dao = new GenericDao<>(User.class);
-        dao.openCurrentSessionwithTransaction();
-        dao.update(ura2);
-
-        dao.closeCurrentSessionwithTransaction();
+//
+//        int id = ura.getUser_id();
+//
+//
+//        User uraReborn = (User) session.get(User.class, id);
+//        System.out.println(uraReborn.getLogin());
+//        session.close();
+//
+//        User ura2 = new User("Max", "kek");
+//        GenericDao<User> dao = new GenericDao<>(User.class);
+//        dao.openCurrentSessionwithTransaction();
+//        dao.update(ura2);
+//
+//        dao.closeCurrentSessionwithTransaction();
 
     }
 }

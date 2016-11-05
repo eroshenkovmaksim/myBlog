@@ -4,9 +4,7 @@ package com.ncblog.domain;
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Администратор on 02.11.2016.
@@ -17,9 +15,9 @@ import java.util.List;
 public class User {
 
     @Id
-    @SequenceGenerator(name="seq-gen", sequenceName="USERS_ID_SEQ", initialValue=205, allocationSize=1)
+    @SequenceGenerator(name="seq-gen", sequenceName="USERS_USER_ID_SEQ", initialValue=205, allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen")
-    @Column(name = "ID")
+    @Column(name = "USER_ID")
     private int user_id;
 
     @Column(name = "LOGIN")
@@ -28,8 +26,11 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-//    @OneToMany
-//    List<Post> posts = new ArrayList<>();
+    @Column (name = "REGISTRATION_DATE")
+    private Date registration_date;
+
+    @OneToMany(mappedBy="user",targetEntity=Post.class, fetch=FetchType.EAGER)
+    Collection<Post> posts = new HashSet();
 
 //    private String first_name;
 //    private String last_name;
@@ -37,7 +38,7 @@ public class User {
 //    private int age;
 //    private String email;
 //    private URL avatar;
-//    private Date registarion_date;
+
 //    private int number_of_posts;
 //    private String access_level;
 
@@ -47,6 +48,32 @@ public class User {
     public User(String login, String password) {
         this.login = login;
         this.password = password;
+        this.registration_date = new Date();
+    }
+
+    public User(String login, String password, Collection<Post> posts) {
+        this.login = login;
+        this.password = password;
+        this.posts = posts;
+    }
+
+    public Date getRegistration_date() {
+        return registration_date;
+    }
+
+    public void setRegistration_date(Date registration_date) {
+        this.registration_date = registration_date;
+    }
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
+    public void setPost(Post post) {
+        posts.add(post);
     }
 
     public int getUser_id() {
