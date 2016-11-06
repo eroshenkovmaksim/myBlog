@@ -1,13 +1,9 @@
 package com.ncblog;
 
+import com.ncblog.dataaccess.repositories.HibernateUtil;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.usertype.UserType;
-
-import java.util.Map;
 
 /**
  * Created by Администратор on 04.11.2016

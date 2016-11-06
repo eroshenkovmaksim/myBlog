@@ -1,4 +1,4 @@
-package com.ncblog;
+package com.ncblog.dataaccess.repositories;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.service.ServiceRegistryBuilder;

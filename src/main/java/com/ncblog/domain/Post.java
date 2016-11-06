@@ -27,7 +27,7 @@ public class Post {
     @Column (name = "CREATION_DATE")
     private Date creation_date;
 
-    @OneToMany(mappedBy="post",targetEntity=Post_Like.class, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="post", targetEntity=Post_Like.class, fetch=FetchType.EAGER)
     Set<Post_Like> posts_likes = new HashSet<>();
 
     @OneToMany(mappedBy="post",targetEntity=Comment.class, fetch=FetchType.EAGER)
@@ -41,7 +41,6 @@ public class Post {
         this.creation_date = new Date();
 
     }
-
 
     public Set<Comment> getComments() {
         return comments;

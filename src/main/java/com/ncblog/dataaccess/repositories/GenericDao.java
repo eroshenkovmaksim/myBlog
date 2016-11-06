@@ -1,10 +1,11 @@
-package com.ncblog;
+package com.ncblog.dataaccess.repositories;
 
 /**
  * Created by Администратор on 04.11.2016.
  */
-//import com.hermes.infrastructure.dataaccess.specifications.Specification;
+import com.ncblog.dataaccess.specifications.Specification;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.util.List;
@@ -40,6 +41,7 @@ public class GenericDao<T>  {
         currentTransaction.commit();
         currentSession.close();
     }
+
     public Session getCurrentSession() {
         return currentSession;
     }
@@ -61,15 +63,19 @@ public class GenericDao<T>  {
     public T findById(int id) {
         return typeParameterClass.cast(getCurrentSession().get(typeParameterClass, id));
     }
-    /*
-        public <T> List findAllBySpecification(Specification<T>...specification) {
-            Criteria criteria = getCurrentSession().createCriteria(specification[0].getType());
-            for(Specification<T> detail : specification) {
-                criteria.add(detail.toCriterion());
-            }
-            return criteria.list();
+
+    public <T> List findAllBySpecification(Specification<T>...specification) {
+        Criteria criteria = getCurrentSession().createCriteria(specification[0].getType());
+        for(Specification<T> detail : specification) {
+            criteria.add(detail.toCriterion());
         }
-    */
+        return criteria.list();
+    }
+
+//    public <T> List findAllBySql(String query) {
+//        return getCurrentSession().createQuery(query).list();
+//    }
+
     public List<T> findAll() {
         List<T> books = (List<T>) getCurrentSession().createCriteria(typeParameterClass).list();
         return books;
