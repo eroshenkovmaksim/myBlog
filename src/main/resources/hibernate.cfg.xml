@@ -15,7 +15,8 @@
 
         <mapping class="com.ncblog.domain.Post"></mapping>
         <mapping class="com.ncblog.domain.User"></mapping>
-        <mapping class="com.ncblog.domain.Posts_Likes"></mapping>
+        <mapping class="com.ncblog.domain.Post_Like"></mapping>
+        <mapping class="com.ncblog.domain.Comment"></mapping>
 
 
 

@@ -1,7 +1,6 @@
 package com.ncblog.domain;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.util.*;
 
 /**
@@ -28,11 +27,11 @@ public class Post {
     @Column (name = "CREATION_DATE")
     private Date creation_date;
 
-    @OneToMany(mappedBy="post",targetEntity=Posts_Likes.class, fetch=FetchType.EAGER)
-    Set<Posts_Likes> posts_likes = new HashSet<>(
+    @OneToMany(mappedBy="post",targetEntity=Post_Like.class, fetch=FetchType.EAGER)
+    Set<Post_Like> posts_likes = new HashSet<>();
 
-    );
-//    private int comments;
+    @OneToMany(mappedBy="post",targetEntity=Comment.class, fetch=FetchType.EAGER)
+    Set<Comment> comments = new HashSet<>();
 
     public Post() {
     }
@@ -43,24 +42,20 @@ public class Post {
 
     }
 
-    public Post(User user, String content) {
-        this.user = user;
-        this.content = content;
-        this.creation_date = new Date();
+
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public Post(User user, String content, Date creation_date, Set<Posts_Likes> posts_likes) {
-        this.user = user;
-        this.content = content;
-        this.creation_date = creation_date;
-        this.posts_likes = posts_likes;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
-    public Set<Posts_Likes> getPosts_likes() {
+    public Set<Post_Like> getPosts_likes() {
         return posts_likes;
     }
 
-    public void setPosts_likes(Set<Posts_Likes> posts_likes) {
+    public void setPosts_likes(Set<Post_Like> posts_likes) {
         this.posts_likes = posts_likes;
     }
 
@@ -74,10 +69,6 @@ public class Post {
 
     public Date getCreation_date() {
         return creation_date;
-    }
-
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
     }
 
     public int getPost_id() {

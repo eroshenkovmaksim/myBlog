@@ -4,15 +4,14 @@ package com.ncblog;
  * Created by Администратор on 04.11.2016.
  */
 //import com.hermes.infrastructure.dataaccess.specifications.Specification;
+import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
-import com.ncblog.domain.Posts_Likes;
+import com.ncblog.domain.Post_Like;
 import com.ncblog.domain.User;
 
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
+
 /**
  * Created by ivan on 01.11.16.
  */
@@ -126,10 +125,20 @@ public class GenericRepository<T> {
         repPost.add(post);
     }
     public void addLikeToPostByUser(User user,Post post){
-        GenericRepository<Posts_Likes> repPL = new GenericRepository<>(Posts_Likes.class);
-        Posts_Likes pl = new Posts_Likes(user, post);
+        GenericRepository<Post_Like> repPL = new GenericRepository<>(Post_Like.class);
+        Post_Like pl = new Post_Like(user, post);
         user.getPosts_likes().add(pl);
         post.getPosts_likes().add(pl);
         repPL.add(pl);
     }
+
+    public void addCommentToPostByUser(User user, Post post, Comment comment){
+        GenericRepository<Comment> repCom = new GenericRepository<>(Comment.class);
+        comment.setUser(user);
+        comment.setPost(post);
+        user.getComments().add(comment);
+        post.getComments().add(comment);
+        repCom.add(comment);
+    }
+
 }

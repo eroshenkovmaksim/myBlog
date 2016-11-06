@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "POSTS_LIKES")
-public class Posts_Likes {
+public class Post_Like {
 
     @Id
     @SequenceGenerator(name="seq-gen3", sequenceName="POSTS_LIKES_LIKE_ID_SEQ", initialValue=205, allocationSize=1)
@@ -23,10 +23,10 @@ public class Posts_Likes {
     @JoinColumn(name="POST_ID",referencedColumnName="POST_ID")
     private Post post;
 
-    public Posts_Likes() {
+    public Post_Like() {
     }
 
-    public Posts_Likes(User user, Post post) {
+    public Post_Like(User user, Post post) {
         this.user = user;
         this.post = post;
     }
