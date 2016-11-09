@@ -11,15 +11,13 @@ import java.util.*;
 public class Post {
 
     @Id
-    @SequenceGenerator(name="seq-gen2", sequenceName="POSTS_POST_ID_SEQ", initialValue=205, allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen2")
-    @Column(name = "POST_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POST_ID", unique = true, nullable = false)
     private int post_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID",referencedColumnName="USER_ID")
+    @JoinColumn(name="USER_ID")
     private User user;
-//    private int user_id;
 
     @Column (name = "CONTENT")
     private String content;
@@ -27,11 +25,11 @@ public class Post {
     @Column (name = "CREATION_DATE")
     private Date creation_date;
 
-    @OneToMany(mappedBy="post", targetEntity=Post_Like.class, fetch=FetchType.EAGER)
-    Set<Post_Like> posts_likes = new HashSet<>();
-
-    @OneToMany(mappedBy="post",targetEntity=Comment.class, fetch=FetchType.EAGER)
-    Set<Comment> comments = new HashSet<>();
+//    @OneToMany(mappedBy="post", targetEntity=Post_Like.class, fetch=FetchType.EAGER)
+//    Set<Post_Like> posts_likes = new HashSet<>();
+//
+//    @OneToMany(mappedBy="post",targetEntity=Comment.class, fetch=FetchType.EAGER)
+//    Set<Comment> comments = new HashSet<>();
 
     public Post() {
     }
@@ -42,20 +40,28 @@ public class Post {
 
     }
 
-    public Set<Comment> getComments() {
-        return comments;
+//    public Set<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(Set<Comment> comments) {
+//        this.comments = comments;
+//    }
+//
+//    public Set<Post_Like> getPosts_likes() {
+//        return posts_likes;
+//    }
+//
+//    public void setPosts_likes(Set<Post_Like> posts_likes) {
+//        this.posts_likes = posts_likes;
+//    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Set<Post_Like> getPosts_likes() {
-        return posts_likes;
-    }
-
-    public void setPosts_likes(Set<Post_Like> posts_likes) {
-        this.posts_likes = posts_likes;
+    public void setCreation_date(Date creation_date) {
+        this.creation_date = creation_date;
     }
 
     public User getUser() {

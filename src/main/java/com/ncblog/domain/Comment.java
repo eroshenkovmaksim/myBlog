@@ -12,17 +12,16 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    @SequenceGenerator(name="seq-gen4", sequenceName="COMMENTS_COMMENT_ID_SEQ", initialValue=205, allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen4")
-    @Column(name = "COMMENT_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_ID", unique = true, nullable = false)
     private int comment_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID",referencedColumnName="USER_ID")
+    @JoinColumn(name="USER_ID")
     private User user;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="POST_ID",referencedColumnName="POST_ID")
+    @JoinColumn(name="POST_ID")
     private Post post;
 
     @Column (name = "COMMENT")
@@ -40,6 +39,13 @@ public class Comment {
 
     }
 
+    public void setComment_id(int comment_id) {
+        this.comment_id = comment_id;
+    }
+
+    public void setCreation_date(Date creation_date) {
+        this.creation_date = creation_date;
+    }
 
     public int getComment_id() {
         return comment_id;

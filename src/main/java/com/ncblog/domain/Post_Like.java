@@ -10,17 +10,16 @@ import javax.persistence.*;
 public class Post_Like {
 
     @Id
-    @SequenceGenerator(name="seq-gen3", sequenceName="POSTS_LIKES_LIKE_ID_SEQ", initialValue=205, allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="seq-gen3")
-    @Column(name = "LIKE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "LIKE_ID", unique = true, nullable = false)
     private int like_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID",referencedColumnName="USER_ID")
+    @JoinColumn(name="USER_ID")
     private User user;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="POST_ID",referencedColumnName="POST_ID")
+    @JoinColumn(name="POST_ID")
     private Post post;
 
     public Post_Like() {
@@ -29,6 +28,10 @@ public class Post_Like {
     public Post_Like(User user, Post post) {
         this.user = user;
         this.post = post;
+    }
+
+    public void setLike_id(int like_id) {
+        this.like_id = like_id;
     }
 
     public int getLike_id() {
