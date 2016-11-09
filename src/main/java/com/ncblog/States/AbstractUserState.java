@@ -55,7 +55,7 @@ public abstract class AbstractUserState extends AbstractState {
         consoleView.println("  exit: exits current account;");
         consoleView.println("  show: shows your own posts;");
         consoleView.println("  delete: deletes your own post;");
-        consoleView.println("  post: prints new post on your personal page");
+        consoleView.println("  post: prints new post on your personal page;");
     }
 
     void printInfo(Controller controller){
