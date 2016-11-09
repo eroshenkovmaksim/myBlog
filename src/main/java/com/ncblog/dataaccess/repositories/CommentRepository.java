@@ -15,8 +15,8 @@ public class CommentRepository extends GenericRepository<Comment> {
 
         comment.setUser(user);
         comment.setPost(post);
-        user.getComments().add(comment);
-        post.getComments().add(comment);
+//        user.getComments().add(comment);
+//        post.getComments().add(comment);
         this.add(comment);
     }
 }

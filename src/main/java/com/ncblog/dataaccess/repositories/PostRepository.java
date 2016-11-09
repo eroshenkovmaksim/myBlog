@@ -13,7 +13,7 @@ public class PostRepository extends GenericRepository<Post> {
     public void addPostToUser(Post post,User user){
 
         post.setUser(user);
-        user.getPosts().add(post);
+//        user.getPosts().add(post);
         this.add(post);
     }
 }

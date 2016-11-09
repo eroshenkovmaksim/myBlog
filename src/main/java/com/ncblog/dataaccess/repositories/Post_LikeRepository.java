@@ -14,8 +14,8 @@ public class Post_LikeRepository extends GenericRepository<Post_Like> {
     public void addLikeToPostByUser(User user, Post post){
 
         Post_Like pl = new Post_Like(user, post);
-        user.getPosts_likes().add(pl);
-        post.getPosts_likes().add(pl);
+//        user.getPosts_likes().add(pl);
+//        post.getPosts_likes().add(pl);
         this.add(pl);
     }
 }

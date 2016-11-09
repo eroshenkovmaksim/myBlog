@@ -1,9 +1,14 @@
 package com.ncblog;
 
-import com.ncblog.dataaccess.repositories.HibernateUtil;
+import com.ncblog.dataaccess.repositories.*;
+import com.ncblog.dataaccess.specifications.users.UserWhich;
+import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 import org.hibernate.*;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Администратор on 04.11.2016
@@ -11,31 +16,40 @@ import org.hibernate.*;
 public class Main {
     public static void main(String args[]) {
         User ura = new User("Minin", "yura");
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(ura);
+        User max = new User("Max","krasava");
+        UserRepository userRepository = new UserRepository();
+        PostRepository postRepository = new PostRepository();
+        Post_LikeRepository post_likeRepository = new Post_LikeRepository();
+        CommentRepository commentRepository = new CommentRepository();
 
-        Post post = new Post("privetiki");
+        Post post = new Post("privetik");
+        Post post2 = new Post("aloha");
+        userRepository.add(ura);
+        userRepository.add(max);
+        postRepository.addPostToUser(post, ura);
+        postRepository.addPostToUser(post2,ura);
+        post_likeRepository.addLikeToPostByUser(max,post);
+        post_likeRepository.addLikeToPostByUser(ura,post);
+//        post_likeRepository.addLikeToPostByUser(max,post);
 
-        post.setUser(ura);
-        ura.setPost(post);
+        Comment comment = new Comment("nice");
+        commentRepository.addCommentToPostByUser(max,post,comment);
+//        commentRepository.addCommentToPostByUser(max,post,comment);
 
-        session.save(post);
-        transaction.commit();
 //
-//        int id = ura.getUser_id();
-//
-//
-//        User uraReborn = (User) session.get(User.class, id);
-//        System.out.println(uraReborn.getLogin());
-//        session.close();
-//
-//        User ura2 = new User("Max", "kek");
-//        GenericDao<User> dao = new GenericDao<>(User.class);
-//        dao.openCurrentSessionwithTransaction();
-//        dao.update(ura2);
-//
-//        dao.closeCurrentSessionwithTransaction();
+//        System.out.print("ura's 1st post got ");
+//        System.out.print(post.getPosts_likes().size());
+//        System.out.println(" likes");
+
+//        List<User> yras = userRepository.getEvery(UserWhich.hasLogin("Max"));
+        List<User> yras = userRepository.getAll();
+        for(User yra : yras) {
+            System.out.println(yra.getUser_id());
+        }
+        Collection<Post> posts =ura.getPosts();
+        for(Post p: posts) {
+            System.out.println(p.getContent());
+        }
 
     }
 }
