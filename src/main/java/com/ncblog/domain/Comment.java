@@ -17,11 +17,11 @@ public class Comment {
     private int comment_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="USER_ID",referencedColumnName = "USER_ID")
     private User user;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="POST_ID")
+    @JoinColumn(name="POST_ID",referencedColumnName = "POST_ID")
     private Post post;
 
     @Column (name = "COMMENT")

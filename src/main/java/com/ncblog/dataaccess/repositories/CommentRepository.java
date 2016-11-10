@@ -4,19 +4,26 @@ import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Администратор on 06.11.2016.
  */
 public class CommentRepository extends GenericRepository<Comment> {
+    Set<Comment> comments = new HashSet<>();
     public CommentRepository() {
         super(Comment.class);
     }
     public void addCommentToPostByUser(User user, Post post, Comment comment){
+        if(comments.contains(comment)){
+            this.update(comment);
+        }else {
+            comment.setUser(user);
+            comment.setPost(post);
+            this.add(comment);
+        }
+        comments.add(comment);
 
-        comment.setUser(user);
-        comment.setPost(post);
-//        user.getComments().add(comment);
-//        post.getComments().add(comment);
-        this.add(comment);
     }
 }

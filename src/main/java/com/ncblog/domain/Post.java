@@ -16,7 +16,7 @@ public class Post {
     private int post_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="USER_ID",referencedColumnName = "USER_ID")
     private User user;
 
     @Column (name = "CONTENT")

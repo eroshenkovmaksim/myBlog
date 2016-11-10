@@ -15,11 +15,11 @@ public class Post_Like {
     private int like_id;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="USER_ID")
+    @JoinColumn(name="USER_ID", referencedColumnName = "USER_ID")
     private User user;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="POST_ID")
+    @JoinColumn(name="POST_ID", referencedColumnName = "POST_ID")
     private Post post;
 
     public Post_Like() {
