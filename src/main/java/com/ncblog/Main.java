@@ -1,13 +1,10 @@
 package com.ncblog;
 
 import com.ncblog.dataaccess.repositories.*;
-import com.ncblog.dataaccess.specifications.users.UserWhich;
 import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
-import org.hibernate.*;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -19,7 +16,7 @@ public class Main {
         User max = new User("Max","krasava");
         UserRepository userRepository = new UserRepository();
         PostRepository postRepository = new PostRepository();
-        Post_LikeRepository post_likeRepository = new Post_LikeRepository();
+        PostLikeRepository post_likeRepository = new PostLikeRepository();
         CommentRepository commentRepository = new CommentRepository();
 //
         Post post = new Post("privetik");
@@ -35,6 +32,7 @@ public class Main {
         post_likeRepository.addLikeToPostByUser(max,post);
 
         Comment comment = new Comment("nice");
+        commentRepository.addCommentToPostByUser(max,post,comment);
         commentRepository.addCommentToPostByUser(max,post,comment);
 
 

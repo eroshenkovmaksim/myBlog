@@ -25,8 +25,8 @@ public class Post {
     @Column (name = "CREATION_DATE")
     private Date creation_date;
 
-//    @OneToMany(mappedBy="post", targetEntity=Post_Like.class, fetch=FetchType.EAGER)
-//    Set<Post_Like> posts_likes = new HashSet<>();
+//    @OneToMany(mappedBy="post", targetEntity=PostLike.class, fetch=FetchType.EAGER)
+//    Set<PostLike> posts_likes = new HashSet<>();
 //
 //    @OneToMany(mappedBy="post",targetEntity=Comment.class, fetch=FetchType.EAGER)
 //    Set<Comment> comments = new HashSet<>();
@@ -48,11 +48,11 @@ public class Post {
 //        this.comments = comments;
 //    }
 //
-//    public Set<Post_Like> getPosts_likes() {
+//    public Set<PostLike> getPosts_likes() {
 //        return posts_likes;
 //    }
 //
-//    public void setPosts_likes(Set<Post_Like> posts_likes) {
+//    public void setPosts_likes(Set<PostLike> posts_likes) {
 //        this.posts_likes = posts_likes;
 //    }
 

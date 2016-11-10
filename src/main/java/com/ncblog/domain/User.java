@@ -29,8 +29,8 @@ public class User  {
 //    @OneToMany(mappedBy="user",targetEntity=Post.class, fetch=FetchType.EAGER)
 //    Set<Post> posts = new HashSet();
 //
-//    @OneToMany(mappedBy="user",targetEntity=Post_Like.class, fetch=FetchType.EAGER)
-//    Set<Post_Like> posts_likes = new HashSet<>();
+//    @OneToMany(mappedBy="user",targetEntity=PostLike.class, fetch=FetchType.EAGER)
+//    Set<PostLike> posts_likes = new HashSet<>();
 //
 //    @OneToMany(mappedBy="user",targetEntity=Comment.class, fetch=FetchType.EAGER)
 //    Set<Comment> comments = new HashSet<>();
@@ -62,11 +62,11 @@ public class User  {
 //        this.comments = comments;
 //    }
 //
-//    public Set<Post_Like> getPosts_likes() {
+//    public Set<PostLike> getPosts_likes() {
 //        return posts_likes;
 //    }
 //
-//    public void setPosts_likes(Set<Post_Like> posts_likes) {
+//    public void setPosts_likes(Set<PostLike> posts_likes) {
 //        this.posts_likes = posts_likes;
 //    }
 

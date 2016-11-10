@@ -5,10 +5,6 @@ package com.ncblog.dataaccess.repositories;
  */
 
 import com.ncblog.dataaccess.specifications.Specification;
-import com.ncblog.domain.Comment;
-import com.ncblog.domain.Post;
-import com.ncblog.domain.Post_Like;
-import com.ncblog.domain.User;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "POSTS_LIKES")
-public class Post_Like {
+public class PostLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class Post_Like {
     @JoinColumn(name="POST_ID", referencedColumnName = "POST_ID")
     private Post post;
 
-    public Post_Like() {
+    public PostLike() {
     }
 
-    public Post_Like(User user, Post post) {
+    public PostLike(User user, Post post) {
         this.user = user;
         this.post = post;
     }
