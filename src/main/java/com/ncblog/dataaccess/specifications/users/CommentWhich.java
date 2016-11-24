@@ -14,7 +14,7 @@ public class CommentWhich extends AbstractWhich<Comment> {
     public CommentWhich() {
     }
 
-    public static Specification<Comment> belongsToPost(int user_id){
-        return new belongsToPost(user_id);
+    public static Specification<Comment> belongsToPost(int post_id){
+        return new belongsToPost(post_id);
     }
 }

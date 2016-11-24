@@ -13,8 +13,8 @@ import org.hibernate.criterion.Restrictions;
 public class belongsToPost extends AbstractSpecification<Comment> {
     private int post_id;
 
-    belongsToPost(int user_id) {
-        this.post_id = user_id;
+    belongsToPost(int post_id) {
+        this.post_id = post_id;
     }
 
     public boolean isSatisfiedBy(Comment comment) {

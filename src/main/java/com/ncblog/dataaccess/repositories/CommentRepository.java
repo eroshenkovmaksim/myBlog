@@ -1,10 +1,14 @@
 package com.ncblog.dataaccess.repositories;
 
+import com.ncblog.dataaccess.specifications.users.CommentWhich;
+import com.ncblog.dataaccess.specifications.users.PostWhich;
+import com.ncblog.dataaccess.specifications.users.UserWhich;
 import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,6 +28,9 @@ public class CommentRepository extends GenericRepository<Comment> {
             this.add(comment);
         }
         comments.add(comment);
-
+    }
+    public List<Comment> getCommentsInPost(Post post){
+        List<Comment> comments = this.getEvery(CommentWhich.belongsToPost(post.getPost_id()));
+        return comments;
     }
 }
