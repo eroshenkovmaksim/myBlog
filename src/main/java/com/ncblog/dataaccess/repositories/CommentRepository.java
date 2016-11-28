@@ -6,6 +6,7 @@ import com.ncblog.dataaccess.specifications.users.UserWhich;
 import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
+import org.hibernate.Query;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +32,15 @@ public class CommentRepository extends GenericRepository<Comment> {
     }
     public List<Comment> getCommentsInPost(Post post){
         List<Comment> comments = this.getEvery(CommentWhich.belongsToPost(post.getPost_id()));
+        return comments;
+    }
+    public List<Comment> getPostComments(Post post){
+        GenericDao<Comment> dao = super.getDao();
+        dao.openCurrentSession();
+        Query query = dao.getCurrentSession().createQuery("from Comment where post = :post ");
+        query.setParameter("post", post);
+        List<Comment> comments = query.list();
+        dao.closeCurrentSession();
         return comments;
     }
 }
