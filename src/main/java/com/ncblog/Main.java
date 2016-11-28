@@ -38,17 +38,25 @@ public class Main {
 
 
 //        List<User> yras = userRepository.getEvery(UserWhich.hasLogin("Max"));
-        List<User> yras = userRepository.getAll();
-        for(User yra : yras) {
-            System.out.println(yra.getUser_id());
-        }
-        System.out.println(userRepository.getUserWithLogin("Minin").getUser_id());
-        Post post =postRepository.getPostsByUserWithLogin("Minin").get(0);
-        System.out.println(commentRepository.getCommentsInPost(post).get(0).getComment());
+//        List<User> yras = userRepository.getAll();
+//        for(User yra : yras) {
+//            System.out.println(yra.getUser_id());
+//        }
+//        System.out.println(userRepository.getUserWithLogin("Minin").getUser_id());
+//        Post post =postRepository.getPostsByUserWithLogin("Minin").get(0);
+//        System.out.println(commentRepository.getCommentsInPost(post).get(0).getComment());
 //        Collection<Post> posts =ura.getPosts();
 //        for(Post p: posts) {
 //            System.out.println(p.getContent());
 //        }
+        List<Post> posts = postRepository.getUserPosts("Minin");
+        for(Post post :posts){
+            System.out.println(post.getContent());
+        }
+        List<Comment> comments = commentRepository.getPostComments(posts.get(0));
+        for(Comment comment :comments){
+            System.out.println(comment.getComment());
+        }
 
     }
 }
