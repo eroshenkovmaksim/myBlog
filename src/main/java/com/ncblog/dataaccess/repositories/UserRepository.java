@@ -15,7 +15,14 @@ public class UserRepository extends GenericRepository<User> {
         super(User.class);
     }
     public User getUserWithLogin(String login){
-        return this.getOne(UserWhich.hasLogin(login));
+        User user;
+        try{
+            user = this.getOne(UserWhich.hasLogin(login));
+        }catch(javax.persistence.NoResultException e){
+            System.out.println("wrong login");
+            return null;
+        }
+        return user;
     }
 
 }

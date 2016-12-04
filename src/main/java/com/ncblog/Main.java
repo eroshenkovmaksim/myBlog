@@ -51,12 +51,12 @@ public class Main {
 //        }
         List<Post> posts = postRepository.getUserPosts("Minin");
         for(Post post :posts){
-            System.out.println(post.getContent());
+            System.out.println(post.getContent().length());
         }
-        List<Comment> comments = commentRepository.getPostComments(posts.get(0));
-        for(Comment comment :comments){
-            System.out.println(comment.getComment());
-        }
+//        List<Comment> comments = commentRepository.getPostComments(posts.get(0));
+//        for(Comment comment :comments){
+//            System.out.println(comment.getComment());
+//        }
 
     }
 }

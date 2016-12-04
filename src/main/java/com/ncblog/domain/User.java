@@ -94,7 +94,7 @@ public class User  {
     }
 
     public String getLogin() {
-        return login;
+        return login.trim();
     }
 
     public Date getRegistration_date() {
@@ -110,7 +110,7 @@ public class User  {
     }
 
     public String getPassword() {
-        return password;
+        return password.trim();
     }
 
     public void setPassword(String password) {

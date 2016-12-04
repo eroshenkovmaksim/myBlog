@@ -69,7 +69,7 @@ public class Comment {
     }
 
     public String getComment() {
-        return comment;
+        return comment.trim();
     }
 
     public void setComment(String comment) {
