@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comments</title>
+</head>
+<body>
+<h1>${post} comments</h1><br>
+<#list comments as comment>
+    <p>${comment.comment}
+    <p>${comment.creation_date}
+    <p>${comment.user}
+</#list>
+<input type="submit" name = button value="Back"  />
+</body>
+</html>

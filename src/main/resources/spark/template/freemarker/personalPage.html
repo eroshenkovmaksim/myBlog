@@ -6,8 +6,10 @@
 </head>
 <body>
     <h1>${login}</h1><br>
-    <#list contents as content>
-        <p>${content}
+    <#list posts as post>
+        <p>${post.content}
+        <p>${post.creation_date}</p>
+        <input type="submit" name = ${post.content} value="Comments"  />
     </#list>
 </body>
 </html>
