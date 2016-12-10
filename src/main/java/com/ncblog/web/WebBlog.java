@@ -44,8 +44,6 @@ public class WebBlog {
         post("/registration", (request, response) -> {
             String login = request.queryParams("login");
             String password = request.queryParams("password");
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", login);
             User user =new User(login, password);
             userRepository.add(user);
             HashMap<Object, Object> model = new HashMap<>();
@@ -61,7 +59,7 @@ public class WebBlog {
             if("Sign In".equalsIgnoreCase(value)){
                 if (user != null && (user.getPassword()).equals(password)) {
                     userSessions.put(request.session().id(),user);
-                    response.redirect("/personalpage");
+                    response.redirect("/personalPage");
                     return null;
                 } else {
                     System.out.println("wrong password");
@@ -74,7 +72,7 @@ public class WebBlog {
             }
         },new FreeMarkerEngine());
 
-        get("/personalpage", ((request, response) -> {
+        get("/personalPage", ((request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             String currentSession = request.session().id();
             if(userSessions.containsKey(currentSession)){
@@ -89,21 +87,29 @@ public class WebBlog {
             return null;
         }), new FreeMarkerEngine());
 
-        post("/personalpage", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
+        post("/personalPage", (request, response) -> {
             String currentSession = request.session().id();
-            System.out.println(currentSession);
+            String button = request.queryParams("button");
             if(userSessions.containsKey(currentSession)){
                 User user = userSessions.get(currentSession);
                 String login = user.getLogin();
                 List<Post> posts = postRepository.getUserPosts(login);
                 for(Post post : posts){
                     String value = request.queryParams(post.getContent());
-
                     if("Comments".equalsIgnoreCase(value)){
-                        postSessions.put(currentSession,post);
+                        postSessions.put(currentSession, post);
                         response.redirect("/comments");
                     }
+                    if("Delete Post".equalsIgnoreCase(value)){
+                        postRepository.remove(post);
+                        response.redirect("/personalPage");
+                    }
+                }
+                if("Exit".equalsIgnoreCase(button)){
+                    response.redirect("/status");
+                }
+                if("Add post".equalsIgnoreCase(button)){
+                    response.redirect("/newPost");
                 }
             }
             return null;
@@ -121,6 +127,42 @@ public class WebBlog {
             }
             return null;
         }), new FreeMarkerEngine());
+
+        post("/comments", (request, response) -> {
+            String button =request.queryParams("button");
+            Comment comment = new Comment(request.queryParams("comment"));
+            String currentSession = request.session().id();
+            if(userSessions.containsKey(currentSession)){
+                if("Add Comment".equalsIgnoreCase(button)){
+                    User user = userSessions.get(currentSession);
+                    Post post = postSessions.get(currentSession);
+                    commentRepository.addCommentToPostByUser(user, post, comment);
+                    response.redirect("/comments");
+                }
+
+                if("Back".equalsIgnoreCase(button)){
+                    response.redirect("/personalPage");
+                }
+            }
+            return null;
+        }, new FreeMarkerEngine());
+        get("/newPost", ((request, response) -> {
+            HashMap<Object, Object> model = new HashMap<>();
+            return new ModelAndView(model, "newPost.html");
+        }), new FreeMarkerEngine());
+
+        post("/newPost", (request, response) -> {
+            String content = request.queryParams("post");
+            Post post = new Post(content);
+            String currentSession = request.session().id();
+            if(userSessions.containsKey(currentSession)){
+                User user = userSessions.get(currentSession);
+                postRepository.addPostToUser(post,user);
+                response.redirect("/personalPage");
+            }
+            return null;
+
+        },new FreeMarkerEngine());
     }
 
 }

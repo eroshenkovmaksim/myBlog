@@ -43,4 +43,7 @@ public class CommentRepository extends GenericRepository<Comment> {
         dao.closeCurrentSession();
         return comments;
     }
+    public void remove(Comment comment){
+        super.remove(comment);
+    }
 }

@@ -2,6 +2,7 @@ package com.ncblog.dataaccess.repositories;
 
 import com.ncblog.dataaccess.specifications.users.PostWhich;
 import com.ncblog.dataaccess.specifications.users.UserWhich;
+import com.ncblog.domain.Comment;
 import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 import org.hibernate.Query;
@@ -15,7 +16,7 @@ import java.util.Set;
  */
 public class PostRepository extends GenericRepository<Post> {
     Set<Post> posts = new HashSet();
-
+    CommentRepository commentRepository = new CommentRepository();
     public PostRepository() {
         super(Post.class);
     }
@@ -43,5 +44,13 @@ public class PostRepository extends GenericRepository<Post> {
         List<Post> posts = query.list();
         dao.closeCurrentSession();
         return posts;
+    }
+    public void remove(Post post){
+        List<Comment> comments =commentRepository.getPostComments(post);
+        for(Comment comment : comments){
+            commentRepository.remove(comment);
+        }
+        super.remove(post);
+
     }
 }

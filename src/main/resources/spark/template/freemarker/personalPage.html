@@ -6,10 +6,16 @@
 </head>
 <body>
     <h1>${login}</h1><br>
+    <form action="personalPage" method="post">
     <#list posts as post>
         <p>${post.content}
         <p>${post.creation_date}</p>
         <input type="submit" name = ${post.content} value="Comments"  />
+        <input type="submit" name = ${post.content} value="Delete Post"  />
     </#list>
+        <br>
+        <input type="submit" name = "button" value="Add post" /><br>
+        <input type="submit" name = "button" value="Exit" />
+    </form>
 </body>
 </html>
