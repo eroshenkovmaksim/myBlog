@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<form action="users" method="post">
+    <#list users as user>
+        <p>${user.login}
+        <input type="submit" name = ${user.login} value="Open page"  />
+        <input type="submit" name = ${user.login} value="Delete User"  />
+    </#list>
+    <br>
+    <br>
+
+</form>
+</body>
+</html>

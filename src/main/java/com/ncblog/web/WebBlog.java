@@ -17,7 +17,6 @@ import com.ncblog.domain.Post;
 import com.ncblog.domain.User;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
-import spark.Spark;
 
 import static spark.Spark.*;
 
@@ -83,7 +82,7 @@ public class WebBlog {
                 attributes.put("posts", posts);
                 return new ModelAndView(attributes, "personalPage.html");
             }
-            response.redirect("/login");
+            response.redirect("/status");
             return null;
         }), new FreeMarkerEngine());
 
@@ -108,10 +107,14 @@ public class WebBlog {
                 if("Exit".equalsIgnoreCase(button)){
                     response.redirect("/status");
                 }
+                if("Users".equalsIgnoreCase(button)){
+                    response.redirect("/users");
+                }
                 if("Add post".equalsIgnoreCase(button)){
                     response.redirect("/newPost");
                 }
             }
+            response.redirect("/status");
             return null;
         },new FreeMarkerEngine());
 
@@ -125,6 +128,7 @@ public class WebBlog {
                 attributes.put("comments", comments);
                 return new ModelAndView(attributes, "comments.html");
             }
+            response.redirect("/status");
             return null;
         }), new FreeMarkerEngine());
 
@@ -132,10 +136,19 @@ public class WebBlog {
             String button =request.queryParams("button");
             Comment comment = new Comment(request.queryParams("comment"));
             String currentSession = request.session().id();
+
             if(userSessions.containsKey(currentSession)){
+                User user = userSessions.get(currentSession);
+                Post post = postSessions.get(currentSession);
+                List<Comment>  comments = commentRepository.getPostComments(post);
+                for(Comment com: comments){
+                    String value = request.queryParams(com.getComment());
+                    if("Delete Comment".equalsIgnoreCase(value)){
+                        commentRepository.remove(com);
+                        response.redirect("/comments");
+                    }
+                }
                 if("Add Comment".equalsIgnoreCase(button)){
-                    User user = userSessions.get(currentSession);
-                    Post post = postSessions.get(currentSession);
                     commentRepository.addCommentToPostByUser(user, post, comment);
                     response.redirect("/comments");
                 }
@@ -163,6 +176,18 @@ public class WebBlog {
             return null;
 
         },new FreeMarkerEngine());
+
+        get("/users", ((request, response) -> {
+            String currentSession = request.session().id();
+            if(userSessions.containsKey(currentSession)) {
+                List<User> users = userRepository.getAll();
+                Map<String, Object> attributes = new HashMap<>();
+                attributes.put("users", users);
+                return new ModelAndView(attributes, "users.html");
+            }
+            response.redirect("/status");
+           return null;
+        }), new FreeMarkerEngine());
     }
 
 }
